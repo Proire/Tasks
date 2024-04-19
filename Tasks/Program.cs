@@ -4,7 +4,7 @@
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Welcome to Line Comparison Application");
+            Console.WriteLine("Welcome to Line Comparison Computation Application");
         }
     }
 }
