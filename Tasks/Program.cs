@@ -1,24 +1,41 @@
 ﻿using Tasks;
 
-Console.WriteLine("Welcome to Line Comparison Computation Application");
+internal class Program
+{
+    private static void Main(string[] args)
+    {
+        Console.WriteLine("Welcome to Line Comparison Computation Program!");
 
-// Accept input from the user for the coordinates of the two points
-Console.Write("Enter x-coordinate of first point: ");
-double x1 = double.Parse(Console.ReadLine());
+        // Create Line objects for Line 1 and Line 2
+        Line line1 = CreateLine("Line 1");
+        Line line2 = CreateLine("Line 2");
 
-Console.Write("Enter y-coordinate of first point: ");
-double y1 = double.Parse(Console.ReadLine());
+        // Check equality of the two lines using equals method 
+        bool areEqual = line1.Equals(line2);
 
-Console.Write("Enter x-coordinate of second point: ");
-double x2 = double.Parse(Console.ReadLine());
+        if (areEqual)
+        {
+            Console.WriteLine("The two lines are equal based on their endpoints.");
+        }
+        else
+        {
+            Console.WriteLine("The two lines are not equal based on their endpoints.");
+        }
+    }
 
-Console.Write("Enter y-coordinate of second point: ");
-double y2 = double.Parse(Console.ReadLine());
+    // Method to accept coordinates from the user and create a Line object
+    static Line CreateLine(string lineName)
+    {
+        Console.WriteLine($"Enter coordinates for {lineName}:");
+        Console.Write("x1: ");
+        double x1 = double.Parse(Console.ReadLine());
+        Console.Write("y1: ");
+        double y1 = double.Parse(Console.ReadLine());
+        Console.Write("x2: ");
+        double x2 = double.Parse(Console.ReadLine());
+        Console.Write("y2: ");
+        double y2 = double.Parse(Console.ReadLine());
 
-// Create a Line object with the provided coordinates
-Line line = new(x1, y1, x2, y2);
-
-// Calculate the length of the line
-double length = line.CalculateLength();
-
-Console.WriteLine($"Length of the line: {length}");
+        return new Line(x1, y1, x2, y2);
+    }
+}
