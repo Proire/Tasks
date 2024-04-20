@@ -43,4 +43,11 @@ namespace Tasks
             }
         }
     }
+
+    // User Defined Exception to validate the User input 
+    public class NullInputException(String issue) : ApplicationException
+    {
+        public string Issue { get; set; } = issue;
+    }
+
 }
