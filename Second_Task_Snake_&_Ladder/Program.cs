@@ -19,6 +19,24 @@ namespace Second_Task_Snake___Ladder
 
             Console.WriteLine($"Name of the Current Player Playing is {currentPlayer}");
             Console.WriteLine($"Position of the Current Player Playing is {playerOne.PlayerPosition}");
+
+            // terminating condition for the game 
+            bool win = false;
+
+            // if not win yet then continue with the game 
+            while (!win)
+            {
+                Console.WriteLine($"Player {currentPlayer}, press Enter to roll the die.. ");
+                // Hold console for Player until press Enter 
+                Console.ReadKey(true);
+
+                // Dice face value 
+                int roll = rollDie();
+
+                Console.WriteLine($"You Rolled a {roll}");
+
+                win = true;
+            }
         }
 
         static Player getPlayer(int rank)
@@ -33,6 +51,15 @@ namespace Second_Task_Snake___Ladder
                 }
             }
             while (true);
+        }
+
+        static int rollDie()
+        {
+            // Random Generator intialization 
+            Random random = new Random((int)DateTime.Now.Ticks);
+
+            // Returns an Integer
+            return (random.Next() % 6) + 1;
         }
     }
 }
