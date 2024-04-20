@@ -21,5 +21,12 @@ namespace Tasks
         {
             return Math.Sqrt(Math.Pow(X2 - X1, 2) + Math.Pow(Y2 - Y1, 2));
         }
+
+        // Method to check equality of two lines based on endpoints
+        public bool Equals(Line other)
+        {
+            // Check if endpoints of both lines are equal
+            return x1 == other.X1 && y1 == other.Y1 && X2 == other.X2 && y2 == other.Y2;
+        }
     }
 }
