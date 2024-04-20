@@ -26,7 +26,21 @@ namespace Tasks
         public bool Equals(Line other)
         {
             // Check if endpoints of both lines are equal
-            return x1 == other.X1 && y1 == other.Y1 && X2 == other.X2 && y2 == other.Y2;
+            return X1 == other.X1 && Y1 == other.Y1 && X2 == other.X2 && Y2 == other.Y2;
+        }
+
+        // Method to Compare the two lines based on endpoints 
+        public bool Compare(Line other)
+        {
+            // check if endpoints of both lines are equal, greater than or less than other
+            if(this.CalculateLength() > other.CalculateLength())
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
     }
 }

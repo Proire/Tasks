@@ -22,6 +22,18 @@ internal class Program
         {
             Console.WriteLine("The two lines are not equal based on their endpoints.");
         }
+
+        // Check greater of the two lines using compare method 
+        bool isgreater = line1.Compare(line2);
+
+        if(isgreater)
+        {
+            Console.WriteLine("Line 1 is greater than Line 2 based on their endpoints.");
+        }
+        else
+        {
+            Console.WriteLine("Line 1 is lesser than Line 2 based on their endpoints.");
+        }
     }
 
     // Method to accept coordinates from the user and create a Line object
