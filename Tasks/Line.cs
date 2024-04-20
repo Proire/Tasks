@@ -33,7 +33,7 @@ namespace Tasks
         public bool Compare(Line other)
         {
             // check if endpoints of both lines are equal, greater than or less than other
-            if(this.CalculateLength() > other.CalculateLength())
+            if(this.CalculateLength().CompareTo(other.CalculateLength()) > 0)
             {
                 return true;
             }
