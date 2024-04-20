@@ -6,6 +6,7 @@ internal class Program
     {
         Console.WriteLine("Welcome to Line Comparison Computation Program!");
 
+        // Assuming user will only give input for two lines for equality and comparison
         // Create Line objects for Line 1 and Line 2
         Line line1 = CreateLine("Line 1");
         Line line2 = CreateLine("Line 2");
