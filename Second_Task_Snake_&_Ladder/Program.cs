@@ -1,4 +1,5 @@
 ﻿using System.Numerics;
+using System.Runtime.InteropServices;
 
 namespace Second_Task_Snake___Ladder
 {
@@ -12,54 +13,54 @@ namespace Second_Task_Snake___Ladder
 
             // Creating two Players
             Player playerOne = getPlayer(1);
-            Player PlayerTwo = getPlayer(2);
+            Player playerTwo = getPlayer(2);
 
-            // Current Player chance of playing 
-            string currentPlayer = playerOne.Name;
+            // Current Player playing the Game 
+            Player currentPlayer = new Player(playerOne.Name);
 
-            Console.WriteLine($"Name of the Current Player Playing is {currentPlayer}");
-            Console.WriteLine($"Position of the Current Player Playing is {playerOne.PlayerPosition}");
+            // Intialize the Game 
+            SnakeAndLadder snakeandladder = new SnakeAndLadder(currentPlayer, playerOne, playerTwo);
+
+            Console.WriteLine($"Name of the Current Player Playing is {snakeandladder.CurrentPlayer.Name}");
+            Console.WriteLine($"Position of the Current Player Playing is {snakeandladder.CurrentPlayer.PlayerPosition}");
 
             // terminating condition for the game 
-            bool win = false;
+            bool Win = false;
 
             // if not win yet then continue with the game 
-            while (!win)
+            while (!Win)
             {
-                Console.WriteLine($"Player {currentPlayer}, press Enter to roll the die.. ");
+                Console.WriteLine($"Player {snakeandladder.CurrentPlayer.Name}, press Enter to roll the die.. ");
                 // Hold console for Player until press Enter 
                 Console.ReadKey(true);
 
-                // Dice face value 
-                int roll = rollDie();
-
-                Console.WriteLine($"You Rolled a {roll}");
-
-                win = true;
+                if (snakeandladder.CurrentPlayer.Name.Equals(playerOne.Name))
+                {
+                    snakeandladder.MovePlayer(snakeandladder.CurrentPlayer);
+                    Console.WriteLine($"{snakeandladder.playerOne.Name} is now at {snakeandladder.playerOne.PlayerPosition}");
+                }
+                else
+                {
+                    snakeandladder.MovePlayer(snakeandladder.CurrentPlayer);
+                    Console.WriteLine($"{snakeandladder.playerOne.Name} is now at {snakeandladder.playerOne.PlayerPosition}");
+                }
+                snakeandladder.CurrentPlayer.Name = (snakeandladder.CurrentPlayer.Name.Equals(playerOne.Name)) ? playerTwo.Name : playerOne.Name;
             }
         }
 
         static Player getPlayer(int rank)
         {
+
             do
             {
                 Console.WriteLine("Enter the name of Player " + rank);
                 string? player = Console.ReadLine();
                 if (player is not null)
                 {
-                    return new Player(player, 0);
+                    return new Player(player);
                 }
             }
             while (true);
-        }
-
-        static int rollDie()
-        {
-            // Random Generator intialization 
-            Random random = new Random((int)DateTime.Now.Ticks);
-
-            // Returns an Integer
-            return (random.Next() % 6) + 1;
         }
     }
 }
