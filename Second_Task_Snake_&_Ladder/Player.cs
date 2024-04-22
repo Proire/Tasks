@@ -59,6 +59,7 @@ namespace Second_Task_Snake___Ladder
 
         private int MovePlayerPosition(int currentPosition, int roll)
         {
+            // stopping Player from going above 100 
             if (currentPosition + roll > 100)
                 return currentPosition;
             int newPosition = currentPosition + roll;
