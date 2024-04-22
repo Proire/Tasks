@@ -1,4 +1,5 @@
-﻿using System.Numerics;
+﻿using System.Net.Http.Headers;
+using System.Numerics;
 using System.Runtime.InteropServices;
 
 namespace Second_Task_Snake___Ladder
@@ -16,7 +17,7 @@ namespace Second_Task_Snake___Ladder
             Player playerTwo = getPlayer(2);
 
             // Current Player playing the Game 
-            Player currentPlayer = new Player(playerOne.Name);
+            Player currentPlayer = playerOne;
 
             // Intialize the Game 
             SnakeAndLadder snakeandladder = new SnakeAndLadder(currentPlayer, playerOne, playerTwo);
@@ -28,6 +29,7 @@ namespace Second_Task_Snake___Ladder
             bool Win = false;
 
             // if not win yet then continue with the game 
+
             while (!Win)
             {
                 Console.WriteLine($"Player {snakeandladder.CurrentPlayer.Name}, press Enter to roll the die.. ");
@@ -37,16 +39,28 @@ namespace Second_Task_Snake___Ladder
                 if (snakeandladder.CurrentPlayer.Name.Equals(playerOne.Name))
                 {
                     snakeandladder.MovePlayer(snakeandladder.CurrentPlayer);
-                    Console.WriteLine($"{snakeandladder.playerOne.Name} is now at {snakeandladder.playerOne.PlayerPosition}");
+                    snakeandladder.print();
+                    if (snakeandladder.CheckWin(snakeandladder.CurrentPlayer))
+                    {
+                        Console.WriteLine($"{snakeandladder.CurrentPlayer.Name} has won! Congratulations");
+                        Win = true;
+                    }
                 }
                 else
                 {
                     snakeandladder.MovePlayer(snakeandladder.CurrentPlayer);
-                    Console.WriteLine($"{snakeandladder.playerOne.Name} is now at {snakeandladder.playerOne.PlayerPosition}");
+                    snakeandladder.print();
+                    if (snakeandladder.CheckWin(snakeandladder.CurrentPlayer))
+                    {
+                        Console.WriteLine($"{snakeandladder.CurrentPlayer.Name} has won! Congratulations");
+                        Win = true;
+                    }
                 }
-                snakeandladder.CurrentPlayer.Name = (snakeandladder.CurrentPlayer.Name.Equals(playerOne.Name)) ? playerTwo.Name : playerOne.Name;
+                snakeandladder.CurrentPlayer = (snakeandladder.CurrentPlayer.Name.Equals(playerOne.Name)) ? playerTwo : playerOne;
             }
         }
+
+
 
         static Player getPlayer(int rank)
         {
