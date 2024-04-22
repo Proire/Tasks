@@ -16,6 +16,7 @@ namespace Second_Task_Snake___Ladder
         public readonly Player playerTwo;
         public Player CurrentPlayer;
         public readonly Random random = new Random();
+        public int Count { get; set; } = 0;
 
         public SnakeAndLadder(Player currentPlayer, Player player1, Player player2)
         {
@@ -45,7 +46,7 @@ namespace Second_Task_Snake___Ladder
 
         public int RollDie()
         {
-            
+            Count++;
             return random.Next(1, 7);
         }
 
@@ -133,9 +134,9 @@ namespace Second_Task_Snake___Ladder
             Console.WriteLine();
         }
 
-        public bool CheckWin(Player player)
+        public bool CheckWin()
         {
-            return player.PlayerPosition == 100;
+            return CurrentPlayer.PlayerPosition == 100;
         }
     }
 
