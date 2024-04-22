@@ -16,6 +16,7 @@ namespace Second_Task_Snake___Ladder
         public readonly Player playerTwo;
         public Player CurrentPlayer;
         public readonly Random random = new Random();
+        public bool RollAgain { get; set; } = false;
         public int Count { get; set; } = 0;
 
         public SnakeAndLadder(Player currentPlayer, Player player1, Player player2)
@@ -30,6 +31,7 @@ namespace Second_Task_Snake___Ladder
         {
             for (int i = 1; i <= 100; i++)
             {
+
                 Board[i] = i;
             }
 
@@ -64,6 +66,8 @@ namespace Second_Task_Snake___Ladder
             if (currentPosition + roll > 100)
                 return currentPosition;
             int newPosition = currentPosition + roll;
+            if (newPosition == 6 || newPosition == 77)
+                RollAgain = true;
             int newSquare;
             if (newPosition == 6 || newPosition == 23 || newPosition == 45 || newPosition == 61 || newPosition == 77 || newPosition==98 || newPosition==65)
                 newSquare = newPosition + Board[newPosition];
@@ -123,7 +127,7 @@ namespace Second_Task_Snake___Ladder
 
                     if (iterRL % 10 == 0)
                     {
-                        Console.WriteLine("\n\n");
+                        Console.WriteLine("\n");
                         alt = 0;
                         iterRL -= 30;
                     }

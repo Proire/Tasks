@@ -58,7 +58,8 @@ namespace Second_Task_Snake___Ladder
                         Console.WriteLine($"{snakeandladder.Count} times Dice was Roll");
                     }
                 }
-                snakeandladder.CurrentPlayer = (snakeandladder.CurrentPlayer.Name.Equals(playerOne.Name)) ? playerTwo : playerOne;
+                if(!snakeandladder.RollAgain)
+                    snakeandladder.CurrentPlayer = (snakeandladder.CurrentPlayer.Name.Equals(playerOne.Name)) ? playerTwo : playerOne;
             }
         }
 
