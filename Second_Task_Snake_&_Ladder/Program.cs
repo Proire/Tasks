@@ -40,20 +40,22 @@ namespace Second_Task_Snake___Ladder
                 {
                     snakeandladder.MovePlayer(snakeandladder.CurrentPlayer);
                     snakeandladder.print();
-                    if (snakeandladder.CheckWin(snakeandladder.CurrentPlayer))
+                    if (snakeandladder.CheckWin())
                     {
                         Console.WriteLine($"{snakeandladder.CurrentPlayer.Name} has won! Congratulations");
                         Win = true;
+                        Console.WriteLine($"{snakeandladder.Count} times Dice was Roll");
                     }
                 }
                 else
                 {
                     snakeandladder.MovePlayer(snakeandladder.CurrentPlayer);
                     snakeandladder.print();
-                    if (snakeandladder.CheckWin(snakeandladder.CurrentPlayer))
+                    if (snakeandladder.CheckWin())
                     {
                         Console.WriteLine($"{snakeandladder.CurrentPlayer.Name} has won! Congratulations");
                         Win = true;
+                        Console.WriteLine($"{snakeandladder.Count} times Dice was Roll");
                     }
                 }
                 snakeandladder.CurrentPlayer = (snakeandladder.CurrentPlayer.Name.Equals(playerOne.Name)) ? playerTwo : playerOne;
