@@ -37,13 +37,15 @@ namespace Second_Task_Snake___Ladder
 
 
             // Define the positions of snakes and ladders
-            Board[6] = 40;
+            Board[6] = 040;
             Board[23] = -10;
-            Board[45] = -7;
+            Board[45] = -07;
             Board[61] = -18;
-            Board[65] = -8;
-            Board[77] = 5;
+            Board[65] = -08;
+            Board[77] = 005;
             Board[98] = -10;
+
+            print();
         }
 
         public int RollDie()
@@ -91,20 +93,23 @@ namespace Second_Task_Snake___Ladder
                     iterLR--;
                     if (iterLR == playerOne.PlayerPosition)
                     {
-                        Console.Write("#P1    ");
+                        Console.Write(playerOne.Name.Substring(0,3) + "    ");
                     }
                     else if (iterLR == playerTwo.PlayerPosition)
                     {
-                        Console.Write("#P2    ");
+                        Console.Write(playerTwo.Name.Substring(0, 3) + "    ");
                     }
-                    else
+                    else 
                     {
-                        Console.Write(Board[iterLR] + "    ");
+                        if (iterLR == 23 || iterLR == 45 || iterLR == 61 || iterLR == 98 || iterLR == 65)
+                            Console.Write(Board[iterLR].ToString("00") + "    ");
+                        else
+                            Console.Write(Board[iterLR].ToString("000") + "    ");
                     }
 
                     if (iterLR % 10 == 1)
                     {
-                        Console.WriteLine("\n\n");
+                        Console.WriteLine("\n");
                         alt = 1;
                         iterLR -= 10;
                     }
@@ -114,15 +119,18 @@ namespace Second_Task_Snake___Ladder
                     iterRL++;
                     if (iterRL == playerOne.PlayerPosition)
                     {
-                        Console.Write("#P1    ");
+                        Console.Write(playerOne.Name.Substring(0, 3) + "    ");
                     }
                     else if (iterRL == playerTwo.PlayerPosition)
                     {
-                        Console.Write("#P2    ");
+                        Console.Write(playerTwo.Name.Substring(0, 3) + "    ");
                     }
                     else
                     {
-                        Console.Write(Board[iterRL] + "    ");
+                        if (iterRL == 23 || iterRL == 45 || iterRL == 61 || iterRL == 98 || iterRL == 65)
+                            Console.Write(Board[iterRL].ToString("00") + "    ");
+                        else
+                            Console.Write(Board[iterRL].ToString("000") + "    ");
                     }
 
                     if (iterRL % 10 == 0)
