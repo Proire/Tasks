@@ -10,11 +10,14 @@ namespace Second_Task_Snake___Ladder
         {
             Console.WriteLine("Welcome to the Snake and Ladder Game Simulator!");
 
-            Console.WriteLine("Game Starts ");
+            Console.WriteLine("\nGame Starts Now\n");
 
             // Creating two Players
             Player playerOne = getPlayer(1);
             Player playerTwo = getPlayer(2);
+
+            // spacing only 
+            Console.WriteLine();
 
             // Current Player playing the Game 
             Player currentPlayer = playerOne;
@@ -22,7 +25,7 @@ namespace Second_Task_Snake___Ladder
             // Intialize the Game 
             SnakeAndLadder snakeandladder = new SnakeAndLadder(currentPlayer, playerOne, playerTwo);
 
-            Console.WriteLine($"Name of the Current Player Playing is {snakeandladder.CurrentPlayer.Name}");
+            Console.WriteLine($"\nName of the Current Player Playing is {snakeandladder.CurrentPlayer.Name}");
             Console.WriteLine($"Position of the Current Player Playing is {snakeandladder.CurrentPlayer.PlayerPosition}");
 
             // terminating condition for the game 
@@ -32,7 +35,7 @@ namespace Second_Task_Snake___Ladder
 
             while (!Win)
             {
-                Console.WriteLine($"Player {snakeandladder.CurrentPlayer.Name}, press Enter to roll the die.. ");
+                Console.WriteLine($"\nPlayer {snakeandladder.CurrentPlayer.Name}, press Enter to roll the die.. ");
                 // Hold console for Player until press Enter 
                 Console.ReadKey(true);
 
@@ -42,7 +45,7 @@ namespace Second_Task_Snake___Ladder
                     snakeandladder.print();
                     if (snakeandladder.CheckWin())
                     {
-                        Console.WriteLine($"{snakeandladder.CurrentPlayer.Name} has won! Congratulations");
+                        Console.WriteLine($"{snakeandladder.CurrentPlayer.Name} has won! Congratulations to you");
                         Win = true;
                         Console.WriteLine($"{snakeandladder.Count} times Dice was Roll");
                     }
@@ -53,7 +56,7 @@ namespace Second_Task_Snake___Ladder
                     snakeandladder.print();
                     if (snakeandladder.CheckWin())
                     {
-                        Console.WriteLine($"{snakeandladder.CurrentPlayer.Name} has won! Congratulations");
+                        Console.WriteLine($"{snakeandladder.CurrentPlayer.Name} has won! Congratulations to you");
                         Win = true;
                         Console.WriteLine($"{snakeandladder.Count} times Dice was Roll");
                     }
@@ -70,7 +73,7 @@ namespace Second_Task_Snake___Ladder
 
             do
             {
-                Console.WriteLine("Enter the name of Player " + rank);
+                Console.Write("Enter the name of Player " + rank+" : ");
                 string? player = Console.ReadLine();
                 if (player is not null)
                 {
