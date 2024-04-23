@@ -1,5 +1,6 @@
 ﻿using AddressBookSystem;
 using System.Net;
+using System.Transactions;
 
 internal class Program
 {
@@ -23,6 +24,17 @@ internal class Program
         Contact updatedContact = CreateContact("Updated");
         Contact updateresponse = addressBook.UpdateContactByName(updatedContact);  
         Console.WriteLine("Updated Contact : "+updateresponse);
+
+        // Displaying all Contacts
+        Console.WriteLine("Address Book has : ");
+        foreach (var contact in addressBook.GetContacts())
+            Console.WriteLine(contact);
+
+        // Deleting Contact by Name 
+        Console.Write("Enter the Name of Contact to be deleted : ");
+        string name = Console.ReadLine();
+        Contact deleteresponse = addressBook.DeleteContactByName(name);
+        Console.WriteLine("Deleted Contact details : " + deleteresponse);
 
         // Displaying all Contacts
         Console.WriteLine("Address Book has : ");
