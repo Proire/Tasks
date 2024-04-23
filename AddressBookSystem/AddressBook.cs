@@ -52,6 +52,16 @@ namespace AddressBookSystem
             }
             return oldContact;
         }
+
+        public Contact DeleteContactByName(string firstName)
+        {
+            Contact? contact = Contacts.FirstOrDefault(contact => contact.FirstName == firstName);
+            if(contact != null) 
+            { 
+                Contacts.Remove(contact);
+            }
+            return contact;
+        }
     }
 
 
