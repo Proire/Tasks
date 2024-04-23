@@ -12,5 +12,6 @@ namespace AddressBookSystem
         {
             Console.WriteLine("Welcome to Address Book Application");
         }
+        private List<Contact> Contacts { get; set; } = [];
     }
 }
