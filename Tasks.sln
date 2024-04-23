@@ -7,7 +7,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "First_Task", "Tasks\First_T
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{B46CF485-A12C-4133-8BC8-CF5E2FCC2135}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Second_Task_Snake_&_Ladder", "Second_Task_Snake_&_Ladder\Second_Task_Snake_&_Ladder.csproj", "{7DAE44C9-1195-40AA-B163-0F6D567D8CC8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Second_Task_Snake_&_Ladder", "Second_Task_Snake_&_Ladder\Second_Task_Snake_&_Ladder.csproj", "{7DAE44C9-1195-40AA-B163-0F6D567D8CC8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AddressBookSystem", "AddressBookSystem\AddressBookSystem.csproj", "{19DD88C8-7336-4FCA-AFAC-2EC42B31AD89}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,6 +25,10 @@ Global
 		{7DAE44C9-1195-40AA-B163-0F6D567D8CC8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7DAE44C9-1195-40AA-B163-0F6D567D8CC8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7DAE44C9-1195-40AA-B163-0F6D567D8CC8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{19DD88C8-7336-4FCA-AFAC-2EC42B31AD89}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{19DD88C8-7336-4FCA-AFAC-2EC42B31AD89}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{19DD88C8-7336-4FCA-AFAC-2EC42B31AD89}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{19DD88C8-7336-4FCA-AFAC-2EC42B31AD89}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
