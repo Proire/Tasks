@@ -8,6 +8,7 @@ namespace AddressBookSystem
 {
     internal class Contact(string firstName,string lastName, string address, string city, long zip, string state, long phoneNumber, string email)
     {
+        public int Id { get; set; } 
         public string FirstName { get; set; } = firstName;
         public string LastName { get; set; } = lastName;
 

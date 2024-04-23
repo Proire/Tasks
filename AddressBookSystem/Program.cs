@@ -1,14 +1,59 @@
 ﻿using AddressBookSystem;
+using System.Net;
 
 internal class Program
 {
     private static void Main(string[] args)
     {
-        AddressBook addressBook = new AddressBook();
+        AddressBook addressBook = new();
 
-        Console.WriteLine("\nPlease Enter the below details for Contact Entry");
+        // Adding new Contact 
+        Contact newContact = CreateContact("new");
+        String Addresponse = addressBook.AddContact(newContact);
+        Console.WriteLine(Addresponse);
 
-        Console.Write("\nEnter the First Name : ");
+        // Displaying all Contacts
+        Console.WriteLine("Address Book has : ");
+        foreach(var contact in addressBook.GetContacts())
+            Console.WriteLine(contact);
+
+        Console.WriteLine();
+
+        // update current Contact
+        Contact updatedContact = CreateContact("Updated");
+        Contact updateresponse = addressBook.UpdateContactByName(updatedContact);  
+        Console.WriteLine("Updated Contact : "+updateresponse);
+
+        // Displaying all Contacts
+        Console.WriteLine("Address Book has : ");
+        foreach (var contact in addressBook.GetContacts())
+            Console.WriteLine(contact);
+    }
+
+    static String UserInput()
+    {
+        // Accepting user input it can be null as well 
+        String? input = Console.ReadLine();
+
+        // Validating for Null or empty input string 
+        if (string.IsNullOrEmpty(input))
+        {
+            throw new NullInputException("Null Value not allowed");
+        }
+        else
+        {
+            return input;
+        }
+    }
+
+    static Contact CreateContact(string action)
+    {
+        Console.WriteLine($"\nPlease Enter the below details for {action} Contact");
+
+        if (action.Equals("new"))
+            Console.Write("\nEnter the First Name : ");
+        else
+            Console.Write("Enter the name of contact to be updated : ");
         String firstname = UserInput();
 
         Console.Write("\nEnter the Last Name : ");
@@ -32,28 +77,6 @@ internal class Program
         Console.Write("\nEnter the Phonenumber : ");
         long phonenumber = long.Parse(UserInput());
 
-        Console.WriteLine();
-        String response = addressBook.AddContact(new Contact(firstname, lastname, address, city, zip, state, phonenumber, email));
-        Console.WriteLine(response);
-
-        Console.WriteLine("Address Book has : ");
-        foreach(var contact in addressBook.GetContacts())
-            Console.WriteLine(contact);
-    }
-
-    static String UserInput()
-    {
-        // Accepting user input it can be null as well 
-        String? input = Console.ReadLine();
-
-        // Validating for Null or empty input string 
-        if (string.IsNullOrEmpty(input))
-        {
-            throw new NullInputException("Null Value not allowed");
-        }
-        else
-        {
-            return input;
-        }
+        return new Contact(firstname, lastname, address, city, zip, state, phonenumber, email);
     }
 }

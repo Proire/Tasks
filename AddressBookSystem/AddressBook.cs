@@ -14,10 +14,18 @@ namespace AddressBookSystem
         }
         private List<Contact> Contacts { get; set; } = [];
 
+        
+
         public String AddContact(Contact contact)
         {
             if (contact != null)
             {
+                int id;
+                if(Contacts.Count != 0)
+                    id = Contacts.Max(x => x.Id);
+                else
+                    id = 0;
+                contact.Id = id + 1;
                 Contacts.Add(contact);
                 return "Contact Added Successfully";
             }
@@ -27,6 +35,23 @@ namespace AddressBookSystem
         public List<Contact> GetContacts() {  return Contacts; }
 
         public Contact GetContact(int id) {  return Contacts[id]; } 
+
+        public Contact UpdateContactByName(Contact newContact)
+        {
+            Contact? oldContact = Contacts.FirstOrDefault(contact => contact.FirstName == newContact.FirstName);    
+            if(oldContact != null)
+            {
+                oldContact.Id = newContact.Id;
+                oldContact.LastName = newContact.LastName;
+                oldContact.Zip = newContact.Zip;
+                oldContact.PhoneNumber = newContact.PhoneNumber;    
+                oldContact.City = newContact.City;
+                oldContact.Email = newContact.Email;
+                oldContact.Address = newContact.Address;    
+                oldContact.State = newContact.State;    
+            }
+            return oldContact;
+        }
     }
 
 
