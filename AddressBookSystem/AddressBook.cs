@@ -41,7 +41,6 @@ namespace AddressBookSystem
             Contact? oldContact = Contacts.FirstOrDefault(contact => contact.FirstName == newContact.FirstName);    
             if(oldContact != null)
             {
-                oldContact.Id = newContact.Id;
                 oldContact.LastName = newContact.LastName;
                 oldContact.Zip = newContact.Zip;
                 oldContact.PhoneNumber = newContact.PhoneNumber;    
