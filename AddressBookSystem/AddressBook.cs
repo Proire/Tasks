@@ -19,7 +19,7 @@ namespace AddressBookSystem
         public String AddContact(Contact contact)
         {
             Contact ContactPresent = Contacts.FirstOrDefault(cont => cont.Equals(contact));
-            Console.WriteLine(ContactPresent);
+            Console.WriteLine("he kay :"+ContactPresent);
             if (contact != null && ContactPresent == null)
             {
                 int id;
@@ -64,6 +64,15 @@ namespace AddressBookSystem
             return contact;
         }
 
+        public List<Contact> GetContactByCityOrState(string cityOrState)
+        {
+            List<Contact> contacts = [];
+            if(cityOrState != null)
+            {
+                contacts = Contacts.FindAll(contact => (contact.City == cityOrState) || (contact.State==cityOrState));
+            }
+            return contacts;
+        }
         public override string ToString()
         {
             return $"{Name}";
