@@ -24,6 +24,29 @@ namespace AddressBookSystem
 
         public string Email { get; set; } = email;
 
+        public override bool Equals(Object? obj)
+        {
+            if(obj is Contact && obj != null)
+            {
+                Contact contact = (Contact)obj;
+                if (contact.FirstName == FirstName && contact.LastName == LastName)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            return false;
+
+        }
+
+        public override int GetHashCode()
+        {
+            return this.ToString().GetHashCode();
+        }
+
         public override string ToString()
         {
             return $"{Id}. {FirstName} {LastName} {Address} {City} {Zip} {State} {PhoneNumber} {Email}";
