@@ -18,7 +18,9 @@ namespace AddressBookSystem
         public string Name { get; set; } 
         public String AddContact(Contact contact)
         {
-            if (contact != null)
+            Contact ContactPresent = Contacts.FirstOrDefault(cont => cont.Equals(contact));
+            Console.WriteLine(ContactPresent);
+            if (contact != null && ContactPresent == null)
             {
                 int id;
                 if(Contacts.Count != 0)
