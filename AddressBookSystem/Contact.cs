@@ -26,7 +26,7 @@ namespace AddressBookSystem
 
         public override string ToString()
         {
-            return $"{FirstName} {LastName} {Address} {City} {Zip} {State} {PhoneNumber} {Email}";
+            return $"{Id}. {FirstName} {LastName} {Address} {City} {Zip} {State} {PhoneNumber} {Email}";
         }
     }
 }
