@@ -8,14 +8,14 @@ namespace AddressBookSystem
 {
     internal class AddressBook
     {
-        static AddressBook()
+        public AddressBook(string addressbookname)
         {
-            Console.WriteLine("Welcome to Address Book Application");
+            this.Name = addressbookname;
+            Console.WriteLine($"\n---------------------- Created {addressbookname} Address Book ----------------------");
         }
         private List<Contact> Contacts { get; set; } = [];
 
-        
-
+        public string Name { get; set; } 
         public String AddContact(Contact contact)
         {
             if (contact != null)
@@ -38,7 +38,7 @@ namespace AddressBookSystem
 
         public Contact UpdateContactByName(Contact newContact)
         {
-            Contact? oldContact = Contacts.FirstOrDefault(contact => contact.FirstName == newContact.FirstName);    
+            Contact? oldContact = Contacts.FirstOrDefault(contact => contact.FirstName == newContact.FirstName && contact.LastName == newContact.LastName);    
             if(oldContact != null)
             {
                 oldContact.LastName = newContact.LastName;
@@ -60,6 +60,11 @@ namespace AddressBookSystem
                 Contacts.Remove(contact);
             }
             return contact;
+        }
+
+        public override string ToString()
+        {
+            return $"{Name}";
         }
     }
 
