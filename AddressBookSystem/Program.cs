@@ -23,83 +23,97 @@ internal class Program
         do
         {
             Console.WriteLine("\n\nEnter the Choice");
-            Console.WriteLine("\n1.Add Address Book\n2.Enter Address Book\n0.Exit Application\n");
+            Console.WriteLine("\n1.Add Address Book\n2.Enter Address Book\n3.Search Person by City or State\n0.Exit Application\n");
             userChoice = int.Parse(Console.ReadLine());
 
             // Choice for Creating Address Book or Entering particular Address Book
-            if (userChoice == 1)
+            switch(userChoice)
             {
-                // Adding new Address Book 
-                Console.Write("Enter the Name for Address Book : ");
-                string? addressBookname = Console.ReadLine();
-                if (addressbookname != null)
-                    addressBooks.Add(addressBookname, new AddressBook(addressBookname));
-            }
-            else if (userChoice == 2)
-            {
-                Console.Write("\nEnter the Name of Address Book : ");
-                string name = Console.ReadLine();
-                AddressBook addressBook = addressBooks[name];
+                case 1:
+                    // Adding new Address Book 
+                    Console.Write("Enter the Name for Address Book : ");
+                    string? addressBookname = Console.ReadLine();
+                    if (addressbookname != null)
+                        addressBooks.Add(addressBookname, new AddressBook(addressBookname));
+                    break;
+                case 2:
+                    Console.Write("\nEnter the Name of Address Book : ");
+                    string name = Console.ReadLine();
+                    AddressBook addressBook = addressBooks[name];
 
-                // Menu driven code for Contacts
-                int choice;
-                do
-                {
-                    Console.WriteLine("\n\nEnter the Choice : ");
-                    Console.WriteLine("\n1.Add Contact\n2.Update Contact\n3.Delete Contact\n4.Display Contacts\n5.Add Multiple Contacts\n0.Exit Address Book\n");
-                    choice = int.Parse(Console.ReadLine());
-                    switch (choice)
+                    // Menu driven code for Contacts
+                    int choice;
+                    do
                     {
-                        case 1:
-                            // Adding new Contact
-                            Contact newContact = CreateContact("new");
-                            String Addresponse = addressBook.AddContact(newContact);
-                            Console.WriteLine(Addresponse);
-                            break;
-                        case 2:
-                            // Update a Contact
-                            Contact updatedContact = CreateContact("Updated");
-                            Contact updatedresponse = addressBook.UpdateContactByName(updatedContact);
-                            Console.WriteLine("Updated Contact : " + updatedresponse);
-                            break;
-                        case 3:
-                            // Delete Contact by Name 
-                            Console.Write("Enter the Name of Contact to be deleted : ");
-                            string deletename = Console.ReadLine();
-                            Contact deleteresponse = addressBook.DeleteContactByName(deletename);
-                            Console.WriteLine("Deleted Contact details : " + deleteresponse);
-                            break;
-                        case 4:
-                            // Display all Contacts
-                            Console.WriteLine($"Contacts in Address Book {addressBook.Name} : ");
-                            foreach (var contact in addressBook.GetContacts())
-                                Console.WriteLine(contact);
-                            break;
-                        case 5:
-                            // Add Multiple Contacts
-                            Console.Write("Number of Contacts you want to add: ");
-                            int contacts = int.Parse(Console.ReadLine());
-                            do
-                            {
-                                Contact contact = CreateContact("new");
-                                String response = addressBook.AddContact(contact);
-                                Console.WriteLine(response);
-                                contacts--;
-                            } while (contacts > 0);
-                            break;
-                        case 0:
-                            Console.WriteLine($"Exiting Address Book {addressBook}, Thank you for Visiting");
-                            break;
-                        default:
-                            Console.WriteLine("Wrong Choice");
-                            break;
-                    }
+                        Console.WriteLine("\n\nEnter the Choice : ");
+                        Console.WriteLine("\n1.Add Contact\n2.Update Contact\n3.Delete Contact\n4.Display Contacts\n5.Add Multiple Contacts\n0.Exit Address Book\n");
+                        choice = int.Parse(Console.ReadLine());
+                        switch (choice)
+                        {
+                            case 1:
+                                // Adding new Contact
+                                Contact newContact = CreateContact("new");
+                                String Addresponse = addressBook.AddContact(newContact);
+                                Console.WriteLine(Addresponse);
+                                break;
+                            case 2:
+                                // Update a Contact
+                                Contact updatedContact = CreateContact("Updated");
+                                Contact updatedresponse = addressBook.UpdateContactByName(updatedContact);
+                                Console.WriteLine("Updated Contact : " + updatedresponse);
+                                break;
+                            case 3:
+                                // Delete Contact by Name 
+                                Console.Write("Enter the Name of Contact to be deleted : ");
+                                string deletename = Console.ReadLine();
+                                Contact deleteresponse = addressBook.DeleteContactByName(deletename);
+                                Console.WriteLine("Deleted Contact details : " + deleteresponse);
+                                break;
+                            case 4:
+                                // Display all Contacts
+                                Console.WriteLine($"Contacts in Address Book {addressBook.Name} : ");
+                                foreach (var contact in addressBook.GetContacts())
+                                    Console.WriteLine(contact);
+                                break;
+                            case 5:
+                                // Add Multiple Contacts
+                                Console.Write("Number of Contacts you want to add: ");
+                                int contacts = int.Parse(Console.ReadLine());
+                                do
+                                {
+                                    Contact contact = CreateContact("new");
+                                    String response = addressBook.AddContact(contact);
+                                    Console.WriteLine(response);
+                                    contacts--;
+                                } while (contacts > 0);
+                                break;
+                            case 0:
+                                Console.WriteLine($"Exiting Address Book {addressBook}, Thank you for Visiting");
+                                break;
+                            default:
+                                Console.WriteLine("Wrong Choice");
+                                break;
+                        }
 
-                } while (choice != 0);
-            }
-            else
-            {
-                Console.WriteLine("Exiting Application, Thank you for Visiting");
+                    } while (choice != 0);
+                    break;
+                case 3:
+                    Console.Write("Enter the City or State for which Person to be Searched ");
+                    String cityOrState = Console.ReadLine();
+                    List<Contact> ResultContacts = [];
+                    foreach(var addressbook in addressBooks)
+                    {
+                        List<Contact> Contacts = addressbook.Value.GetContactByCityOrState(cityOrState);
+                        ResultContacts.AddRange(Contacts);
+                    }
+                    foreach(var contact in ResultContacts)
+                        Console.WriteLine(contact+" ");
+                    break;
+                case 0:
+                    Console.WriteLine("Exiting Application, Thank you for Visiting"); 
+                    break;
+                default :
+                    break;
             }
         } while (userChoice != 0);
 
