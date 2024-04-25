@@ -108,6 +108,16 @@ namespace AddressBookSystem
             }
             return statePersons;
         }
+
+        public int GetCountByCityOrState(string cityOrState)
+        {
+            List<Contact> contacts = [];
+            if (cityOrState != null)
+            {
+                contacts = Contacts.FindAll(contact => (contact.City == cityOrState) || (contact.State == cityOrState));
+            }
+            return contacts.Count;
+        }
     }
 
 
