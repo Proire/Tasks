@@ -50,7 +50,7 @@ internal class Program
                     do
                     {
                         Console.WriteLine("\n\nEnter the Choice : ");
-                        Console.WriteLine("\n1.Add Contact\n2.Update Contact\n3.Delete Contact\n4.Display Contacts\n5.Add Multiple Contacts\n0.Exit Address Book\n");
+                        Console.WriteLine("\n1.Add Contact\n2.Update Contact\n3.Delete Contact\n4.Display Contacts\n5.Add Multiple Contacts\n6.Get count by City or State\n0.Exit Address Book\n");
                         choice = int.Parse(Console.ReadLine());
                         switch (choice)
                         {
@@ -146,6 +146,16 @@ internal class Program
                             Console.WriteLine(Contact + " ");
                         }
                     }
+                    break;
+                case 6:
+                    Console.Write("Enter the City or State for which Count of Contacts to be given");
+                    String? cityOrstate = Console.ReadLine();
+                    int count = 0;
+                    foreach (var addressbook in addressBooks)
+                    {
+                        count = addressbook.Value.GetCountByCityOrState(cityOrstate);
+                    }
+                    Console.WriteLine($"The count of Contacts for {cityOrstate } is {count}");
                     break;
                 case 0:
                     Console.WriteLine("Exiting Application, Thank you for Visiting"); 
