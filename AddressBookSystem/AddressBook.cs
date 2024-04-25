@@ -18,8 +18,8 @@ namespace AddressBookSystem
         public string Name { get; set; } 
         public String AddContact(Contact contact)
         {
-            Contact ContactPresent = Contacts.FirstOrDefault(cont => cont.Equals(contact));
-            Console.WriteLine("he kay :"+ContactPresent);
+            Contact? ContactPresent = Contacts.FirstOrDefault(cont => cont.Equals(contact));
+            Console.WriteLine("\n"+ContactPresent);
             if (contact != null && ContactPresent == null)
             {
                 int id;
@@ -64,7 +64,7 @@ namespace AddressBookSystem
             return contact;
         }
 
-        public List<Contact> GetContactByCityOrState(string cityOrState)
+        public List<Contact> GetContactsByCityOrState(string cityOrState)
         {
             List<Contact> contacts = [];
             if(cityOrState != null)
@@ -76,6 +76,37 @@ namespace AddressBookSystem
         public override string ToString()
         {
             return $"{Name}";
+        }
+
+        public Dictionary<string,List<Contact>> GetContactsByCity()
+        {
+            Dictionary<string, List<Contact>> cityPersons = [];
+            IEnumerable<Contact> contactCity = Contacts.DistinctBy(contact => contact.City);
+            if (contactCity != null)
+            {
+                foreach (Contact contactcity in contactCity)
+                {
+                    List<Contact> contacts = Contacts.FindAll(contact => contact.City == contactcity.City);
+                    cityPersons.Add(contactcity.City, contacts);
+                }
+
+            }
+            return cityPersons;
+        }
+
+        public Dictionary<string,List<Contact>> GetContactsByState()
+        {
+            Dictionary<string, List<Contact>> statePersons = [];
+            IEnumerable<Contact> contactState = Contacts.DistinctBy(contact => contact.State);
+            if (contactState != null)
+            {
+                foreach (Contact contactstate in contactState)
+                {
+                    List<Contact> contacts = Contacts.FindAll(contact => contact.State == contactstate.State);
+                    statePersons.Add(contactstate.State, contacts);
+                }
+            }
+            return statePersons;
         }
     }
 

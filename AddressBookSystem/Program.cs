@@ -18,12 +18,16 @@ internal class Program
         if (addressbookname != null)
             addressBooks[addressbookname] = new AddressBook(addressbookname);
 
+        // Maintaining Dictionaries for city and states
+        Dictionary<string, List<Contact>> cityPersons = [];
+        Dictionary<string, List<Contact>> statePersons = [];
+
         // Menudriven code for Address book
         int userChoice;
         do
         {
             Console.WriteLine("\n\nEnter the Choice");
-            Console.WriteLine("\n1.Add Address Book\n2.Enter Address Book\n3.Search Person by City or State\n0.Exit Application\n");
+            Console.WriteLine("\n1.Add Address Book\n2.Enter Address Book\n3.Search Person by City or State\n4.Search Person by City\n5.Search Person by State\n0.Exit Application\n");
             userChoice = int.Parse(Console.ReadLine());
 
             // Choice for Creating Address Book or Entering particular Address Book
@@ -98,16 +102,50 @@ internal class Program
                     } while (choice != 0);
                     break;
                 case 3:
-                    Console.Write("Enter the City or State for which Person to be Searched ");
-                    String cityOrState = Console.ReadLine();
+                    Console.Write("Enter the City or State for which Contacts to be Searched ");
+                    String? cityOrState = Console.ReadLine();
                     List<Contact> ResultContacts = [];
                     foreach(var addressbook in addressBooks)
                     {
-                        List<Contact> Contacts = addressbook.Value.GetContactByCityOrState(cityOrState);
-                        ResultContacts.AddRange(Contacts);
+                        List<Contact> contacts = addressbook.Value.GetContactsByCityOrState(cityOrState);
+                        ResultContacts.AddRange(contacts);
                     }
                     foreach(var contact in ResultContacts)
                         Console.WriteLine(contact+" ");
+                    break;
+                case 4:
+                    Console.Write("Fetching the Contacts of each city : ");
+                    foreach (var addressbook in addressBooks)
+                    {
+                        Dictionary<string,List<Contact>> contacts = addressbook.Value.GetContactsByCity();
+                        foreach(var contact in contacts)
+                            cityPersons.TryAdd(contact.Key,contact.Value);
+                    }
+                    foreach (var contact in cityPersons)
+                    {
+                        Console.WriteLine(contact.Key + " ");
+                        foreach(var Contact in contact.Value)
+                        {
+                            Console.WriteLine(Contact+" ");
+                        }
+                    }
+                    break;
+                case 5:
+                    Console.Write("Fetching the Contacts of each state : ");
+                    foreach (var addressbook in addressBooks)
+                    {
+                        Dictionary<string, List<Contact>> contacts = addressbook.Value.GetContactsByState();
+                        foreach (var contact in contacts)
+                            statePersons.TryAdd(contact.Key, contact.Value);
+                    }
+                    foreach (var contact in statePersons)
+                    {
+                        Console.WriteLine(contact.Key + " ");
+                        foreach (var Contact in contact.Value)
+                        {
+                            Console.WriteLine(Contact + " ");
+                        }
+                    }
                     break;
                 case 0:
                     Console.WriteLine("Exiting Application, Thank you for Visiting"); 
