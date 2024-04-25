@@ -161,6 +161,7 @@ internal class Program
                     Console.WriteLine("Exiting Application, Thank you for Visiting"); 
                     break;
                 default :
+                    Console.WriteLine("Wrong choice");
                     break;
             }
         } while (userChoice != 0);
