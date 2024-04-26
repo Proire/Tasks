@@ -27,7 +27,7 @@ internal class Program
         do
         {
             Console.WriteLine("\n\nEnter the Choice");
-            Console.WriteLine("\n1.Add Address Book\n2.Enter Address Book\n3.Search Person by City or State\n4.Search Person by City\n5.Search Person by State\n0.Exit Application\n");
+            Console.WriteLine("\n1.Add Address Book\n2.Enter Address Book\n3.Search Person by City or State\n4.Search Person by City\n5.Search Person by State\n6.Get count by City or State\n7. Get Sorted Contacts by Name\n8. Get Sorted Contacts by city and state\n0.Exit Application\n");
             userChoice = int.Parse(Console.ReadLine());
 
             // Choice for Creating Address Book or Entering particular Address Book
@@ -50,7 +50,7 @@ internal class Program
                     do
                     {
                         Console.WriteLine("\n\nEnter the Choice : ");
-                        Console.WriteLine("\n1.Add Contact\n2.Update Contact\n3.Delete Contact\n4.Display Contacts\n5.Add Multiple Contacts\n6.Get count by City or State\n0.Exit Address Book\n");
+                        Console.WriteLine("\n1.Add Contact\n2.Update Contact\n3.Delete Contact\n4.Display Contacts\n5.Add Multiple Contacts\n0.Exit Address Book\n");
                         choice = int.Parse(Console.ReadLine());
                         switch (choice)
                         {
@@ -102,7 +102,7 @@ internal class Program
                     } while (choice != 0);
                     break;
                 case 3:
-                    Console.Write("Enter the City or State for which Contacts to be Searched ");
+                    Console.Write("Enter the City or State for which Contacts to be Searched : ");
                     String? cityOrState = Console.ReadLine();
                     List<Contact> ResultContacts = [];
                     foreach(var addressbook in addressBooks)
@@ -114,7 +114,7 @@ internal class Program
                         Console.WriteLine(contact+" ");
                     break;
                 case 4:
-                    Console.Write("Fetching the Contacts of each city : ");
+                    Console.WriteLine("Fetching the Contacts of each city : ");
                     foreach (var addressbook in addressBooks)
                     {
                         Dictionary<string,List<Contact>> contacts = addressbook.Value.GetContactsByCity();
@@ -123,7 +123,7 @@ internal class Program
                     }
                     foreach (var contact in cityPersons)
                     {
-                        Console.WriteLine(contact.Key + " ");
+                        Console.WriteLine("--------------"+contact.Key + "--------------");
                         foreach(var Contact in contact.Value)
                         {
                             Console.WriteLine(Contact+" ");
@@ -131,7 +131,7 @@ internal class Program
                     }
                     break;
                 case 5:
-                    Console.Write("Fetching the Contacts of each state : ");
+                    Console.WriteLine("Fetching the Contacts of each state : ");
                     foreach (var addressbook in addressBooks)
                     {
                         Dictionary<string, List<Contact>> contacts = addressbook.Value.GetContactsByState();
@@ -140,7 +140,7 @@ internal class Program
                     }
                     foreach (var contact in statePersons)
                     {
-                        Console.WriteLine(contact.Key + " ");
+                        Console.WriteLine("-----------------"+contact.Key + "-----------------");
                         foreach (var Contact in contact.Value)
                         {
                             Console.WriteLine(Contact + " ");
@@ -156,6 +156,28 @@ internal class Program
                         count = addressbook.Value.GetCountByCityOrState(cityOrstate);
                     }
                     Console.WriteLine($"The count of Contacts for {cityOrstate } is {count}");
+                    break;
+                case 7:
+                    Console.Write("Sorted Contacts By Name : ");
+                    foreach( var addressbook in addressBooks)
+                    {
+                        IEnumerable<Contact> Contacts = addressbook.Value.GetSortedContactsByName();
+                        foreach(var contact in Contacts)
+                        {
+                            Console.WriteLine(contact);
+                        }
+                    }
+                    break;
+                case 8:
+                    Console.Write("Sorted Contacts By city and state : ");
+                    foreach (var addressbook in addressBooks)
+                    {
+                        IEnumerable<Contact> Contacts = addressbook.Value.GetSortedContactsByCityAndState();
+                        foreach (var contact in Contacts)
+                        {
+                            Console.WriteLine(contact);
+                        }
+                    }
                     break;
                 case 0:
                     Console.WriteLine("Exiting Application, Thank you for Visiting"); 

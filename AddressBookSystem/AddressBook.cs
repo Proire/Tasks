@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -118,8 +119,17 @@ namespace AddressBookSystem
             }
             return contacts.Count;
         }
-    }
 
+        public IEnumerable<Contact> GetSortedContactsByName()
+        {
+            return Contacts.OrderBy(contact => contact.FirstName).ThenBy(contact=>contact.LastName);
+        }
+
+        public IEnumerable<Contact> GetSortedContactsByCityAndState()
+        {
+            return Contacts.OrderBy(contact => contact.City).ThenBy(contact => contact.State);
+        }
+    }
 
     // User Defined Exception to validate the User input 
     public class NullInputException(String issue) : ApplicationException
