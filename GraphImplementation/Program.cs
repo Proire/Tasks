@@ -1,4 +1,6 @@
-﻿namespace GraphImplementation
+﻿using System.Diagnostics.Tracing;
+
+namespace GraphImplementation
 {
     internal class Program
     {
@@ -24,6 +26,23 @@
             Console.Write("Enter the Starting Vertice : ");
             _ = int.TryParse(Console.ReadLine(), out source);
             graph.BFS(source);
+
+            // visited reseted 
+            graph.ResetVisited();
+
+            // Depth first Search
+            graph.DFS(source);
+
+            // visited reseted 
+            graph.ResetVisited();
+
+            // depth first search used for searching of key
+            int key;
+            Console.Write("\nEnter the Key to be found : ");
+            _ = int.TryParse(Console.ReadLine(), out key);
+            bool ispresent = graph.DFS_Search(source, key);
+            if(ispresent) { Console.WriteLine("Key is found in graph");}
+            else { Console.WriteLine("Key is not found in graph"); }
 
         }
     }

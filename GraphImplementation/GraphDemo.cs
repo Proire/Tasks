@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
@@ -28,6 +29,11 @@ namespace GraphImplementation
             }
         }
 
+        public void ResetVisited()
+        {
+            for(int i = 0;i < v; i++) visited[i] = 0;
+        }
+
         public void BFS(int source)
         {
             int[] arr = new int[v];   
@@ -52,6 +58,37 @@ namespace GraphImplementation
                     }
                 }
 
+            }
+        }
+
+        public bool DFS_Search(int source,int key)
+        {
+            if (source == key)
+                return true;
+            else
+            {
+                visited[source] = 1;
+                for (int i = 0; i < v; i++)
+                {
+                    if (graph[source,i] == 1 && visited[i] != 1)//neighbour and unvisited
+                    {
+                        DFS_Search(i, key);
+                    }
+                }
+                return false;
+            }
+        }
+
+        public void DFS(int source)
+        {
+            visited[source] = 1;
+            Console.WriteLine("v" + source);
+            for (int i = 0; i < v; i++)
+            {
+                if (graph[source,i]==1 && visited[i]!=1)
+                {
+                    DFS(i);
+                }
             }
         }
         public void PrintGraph()
