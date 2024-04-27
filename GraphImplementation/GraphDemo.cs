@@ -10,10 +10,16 @@ namespace GraphImplementation
 {
     internal class GraphDemo
     {
+        // vertices or nodes
         private int v;
+
+        // Marked Visited
         private int[]? visited;
+
+        // adjancey matrix
         private int[,]? graph;
 
+        // Intialization graph using number of nodes 
         public void CreateGraph(int nodes)
         {
             v = nodes;
@@ -29,6 +35,7 @@ namespace GraphImplementation
             }
         }
 
+        // Reset the Graph visited after every operation
         public void ResetVisited()
         {
             for(int i = 0;i < v; i++) visited[i] = 0;
@@ -39,15 +46,11 @@ namespace GraphImplementation
             int[] arr = new int[v];   
             int front = 0, rear = -1;
             visited[source] = 1;
-            int count = 0;
             arr[++rear] = source; 
             while (front <= rear)
             {
                 int element = arr[front++];
-                count++;
-                Console.Write($"v{element}");
-                if (count != v)
-                    Console.Write(" - ");
+                Console.Write($"v{element} ");
                 for (int i=0; i < v; i++)
                 {
                     if (graph[element,i] == 1 && visited[i] != 1)
@@ -58,6 +61,8 @@ namespace GraphImplementation
                 }
 
             }
+            Console.WriteLine();
+            ResetVisited();
         }
 
         public bool DFS_Search(int source,int key)
@@ -81,7 +86,7 @@ namespace GraphImplementation
         public void DFS(int source)
         {
             visited[source] = 1;
-            Console.WriteLine("v" + source);
+            Console.Write("v" + source+" ");
             for (int i = 0; i < v; i++)
             {
                 if (graph[source,i]==1 && visited[i]!=1)
