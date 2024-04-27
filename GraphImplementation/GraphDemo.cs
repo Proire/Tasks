@@ -45,11 +45,10 @@ namespace GraphImplementation
             {
                 int element = arr[front++];
                 count++;
+                Console.Write($"v{element}");
                 if (count != v)
-                    Console.Write($"v{element} - ");
-                else
-                    Console.WriteLine($"v{element}");
-                for(int i=0; i < v; i++)
+                    Console.Write(" - ");
+                for (int i=0; i < v; i++)
                 {
                     if (graph[element,i] == 1 && visited[i] != 1)
                     {
