@@ -11,7 +11,7 @@ namespace Collections
             Console.WriteLine("Collections Usage");
 
             // 1. ArrayList - creation and initializes it 
-            ArrayList arrayList = ["virat",10,true,20.5,'c'];
+            ArrayList arrayList = ["virat", 10, true, 20.5, 'c'];
             arrayList.Add("pro");
 
             // Displaying the properties and values of Arraylist
@@ -19,20 +19,20 @@ namespace Collections
             Console.WriteLine("    Count:    {0}", arrayList.Count);
             Console.WriteLine("    Capacity: {0}", arrayList.Capacity);
             Console.Write("    Values:");
-            foreach(var element in arrayList)
+            foreach (var element in arrayList)
             {
                 Console.Write("   {0}", element);
             }
             Console.WriteLine();
             arrayList.Remove(10);
-            if(arrayList.Contains(20.5)) { Console.WriteLine("20.5 is present in ArrayList"); }
+            if (arrayList.Contains(20.5)) { Console.WriteLine("20.5 is present in ArrayList"); }
             else { Console.WriteLine("20.5 is present in ArrayList"); }
 
             //arrayList.Sort();         Execption occured due to non-generic collection of different types cannot be compared by sort method
             var query = from s in arrayList.OfType<string>() select s;
-            foreach(var i in query)
+            foreach (var i in query)
             {
-                Console.Write(i+" ");  
+                Console.Write(i + " ");
             }
 
 
@@ -63,7 +63,7 @@ namespace Collections
             Console.WriteLine("For key = \"rtf\", value = {0}.", hashtable["rtf"]);
 
             // Add new key value pair using indexer
-            hashtable["doc"]= "winword.exe";
+            hashtable["doc"] = "winword.exe";
 
             // Containskey used to test keys before inserting them
             if (!hashtable.ContainsKey("ht"))
@@ -107,7 +107,7 @@ namespace Collections
 
 
             // 3. LinkedList - represents doubly linked list
-            string[] words = {"you", "are", "talented", "then", "you", "are", "AB" };
+            string[] words = { "you", "are", "talented", "then", "you", "are", "AB" };
             LinkedList<string> list = new LinkedList<string>(words);
             Console.WriteLine("The linked list values:");
             foreach (string word in words)
@@ -170,6 +170,78 @@ namespace Collections
             {
                 Console.WriteLine(s);
             }
+
+            // 4. Queue
+            // create and intializes a new Queue
+            Queue myQ = new Queue(new ArrayList() { "S","L"}) ;
+            myQ.Enqueue("P");
+            myQ.Enqueue("D");
+
+            // removing 
+            myQ.Dequeue();
+
+            // beginning element 
+            myQ.Peek();
+
+            // is present in queue or not 
+            if (myQ.Contains("D")) { Console.Write("D is present in queue"); }
+            else
+            {
+                Console.WriteLine("D is not present in queue");
+            }
+
+            Console.WriteLine("Count : "+myQ.Count);
+
+            foreach (string word in myQ)
+            { 
+                Console.Write(word+" ");
+            }
+            Console.WriteLine();
+            myQ.Clear();
+
+
+            // 5. Stack
+            // Creates and initializes a new Stack.
+            Stack myStack = new Stack();
+            myStack.Push("Hello");
+            myStack.Push("World");
+            myStack.Push("!");
+
+            // Displays the properties and values of the Stack.
+            Console.WriteLine("myStack");
+            Console.WriteLine("\tCount:    {0}", myStack.Count);
+            Console.Write("\tValues:");
+            foreach (Object obj in myStack)
+                Console.Write("    {0}", obj);
+            Console.WriteLine();
+
+
+            Console.WriteLine(myStack.Pop());
+            Console.WriteLine(myStack.Peek());
+
+
+            // 6. Hashset - create and intializes sets 
+            HashSet<int> evenNumbers = new HashSet<int>();
+            HashSet<int> oddNumbers = new HashSet<int>();
+
+            for (int i = 0; i < 5; i++)
+            {
+                // Populate numbers with just even numbers.
+                evenNumbers.Add(i * 2);
+
+                // Populate oddNumbers with just odd numbers.
+                oddNumbers.Add((i * 2) + 1);
+            }
+
+            evenNumbers.Reverse();
+            Console.Write("{");
+            foreach (int i in evenNumbers)
+            {
+                Console.Write(" {0}", i);
+            }
+            Console.WriteLine(" }");
+
+            Console.WriteLine(oddNumbers.Average());
         }
     }
 }
