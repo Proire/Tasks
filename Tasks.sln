@@ -11,9 +11,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Second_Task_Snake_&_Ladder"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AddressBookSystem", "AddressBookSystem\AddressBookSystem.csproj", "{19DD88C8-7336-4FCA-AFAC-2EC42B31AD89}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GraphImplementation", "GraphImplementation\GraphImplementation.csproj", "{B90C60A6-6882-47FE-A17D-DE50565245C4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GraphImplementation", "GraphImplementation\GraphImplementation.csproj", "{B90C60A6-6882-47FE-A17D-DE50565245C4}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Collections", "Collections\Collections.csproj", "{347C40AB-B686-4A4C-9ECC-10371F2E8577}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RegExp", "RegExp\RegExp.csproj", "{C21BBB01-9960-429A-87F7-4281DA8948F8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -41,6 +43,10 @@ Global
 		{347C40AB-B686-4A4C-9ECC-10371F2E8577}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{347C40AB-B686-4A4C-9ECC-10371F2E8577}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{347C40AB-B686-4A4C-9ECC-10371F2E8577}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C21BBB01-9960-429A-87F7-4281DA8948F8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C21BBB01-9960-429A-87F7-4281DA8948F8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C21BBB01-9960-429A-87F7-4281DA8948F8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C21BBB01-9960-429A-87F7-4281DA8948F8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
