@@ -20,7 +20,7 @@ namespace RegExp
                 Console.WriteLine("{0} (duplicates '{1}') at position {2}",
                                   match.Value, match.Groups[1].Value, match.Index);
 
-            //3. Email Address Matching 
+            // 3. Email Address Matching 
             string pattern2 = @"^\w+@\w+.\a[a-zA-Z]{2,}$";
             Regex regex = new Regex(pattern2);
             Console.WriteLine("Pattern matched with input : "+regex.IsMatch("proiresadah12@gmail.com"));
