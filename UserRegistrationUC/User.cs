@@ -9,10 +9,26 @@ namespace UserRegistration
     internal class User
     {
         public string FirstName { get; set; } = string.Empty;
+
+        public string LastName { get; set; } = string.Empty;
+
+        public string Email { get; set; } = string.Empty;
+
+        public string Phonenumber {  get; set; } = string.Empty;
+
+        public string Password {  get; set; } = string.Empty;
+
     }
 
     // Custom Exception class 
     public class InvalidInputException(String issue) : ApplicationException
+    {
+        public string Issue { get; set; } = issue;
+    }
+
+
+    // User Defined Exception to validate the User input 
+    public class NullInputException(String issue) : ApplicationException
     {
         public string Issue { get; set; } = issue;
     }
