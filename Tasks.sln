@@ -17,6 +17,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Collections", "Collections\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RegExp", "RegExp\RegExp.csproj", "{C21BBB01-9960-429A-87F7-4281DA8948F8}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UserRegistration", "UserRegistrationUC\UserRegistration.csproj", "{A241F88C-5576-4635-8A55-C36C97E55636}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -47,6 +49,10 @@ Global
 		{C21BBB01-9960-429A-87F7-4281DA8948F8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C21BBB01-9960-429A-87F7-4281DA8948F8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C21BBB01-9960-429A-87F7-4281DA8948F8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A241F88C-5576-4635-8A55-C36C97E55636}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A241F88C-5576-4635-8A55-C36C97E55636}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A241F88C-5576-4635-8A55-C36C97E55636}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A241F88C-5576-4635-8A55-C36C97E55636}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
