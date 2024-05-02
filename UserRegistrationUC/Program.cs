@@ -13,7 +13,7 @@ namespace UserRegistrationUC
             Console.WriteLine("------------------ Welcome User ------------------\n");
             Console.Write("Enter the FirstName : ");
             String firstName = UserInput();
-            User user = new User();
+            User user = new();
             if (Regex.IsMatch(firstName, @"^[A-Z]\w{2,}"))
             {
                 user.FirstName = firstName;
@@ -78,18 +78,15 @@ namespace UserRegistrationUC
 
             // clear all email samples provided separately
             string textWithEmailSamples = @" Lorem ipsum dolor sit amet, consectetur adipiscing elit. Email samples: sample1@example.com, sample2@example.com, sample3@example.com Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.";
-
             // Define the regex pattern to match email addresses
             string pattern = @"\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}\b";
-
             // Remove email samples using regex
             string textWithoutEmails = Regex.Replace(textWithEmailSamples, pattern, "");
-
             // Output the text without email samples
             Console.WriteLine("Text without email samples:");
             Console.WriteLine(textWithoutEmails);
 
-
+            // Lambda functions 
 
         }
 
