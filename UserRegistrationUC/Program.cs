@@ -77,9 +77,7 @@ namespace UserRegistrationUC
             Console.WriteLine($"Password of the User : {user.Password}");
 
             // clear all email samples provided separately
-            string textWithEmailSamples = @" Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-            Email samples: sample1@example.com, sample2@example.com, sample3@example.com
-            Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.";
+            string textWithEmailSamples = @" Lorem ipsum dolor sit amet, consectetur adipiscing elit. Email samples: sample1@example.com, sample2@example.com, sample3@example.com Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.";
 
             // Define the regex pattern to match email addresses
             string pattern = @"\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}\b";
