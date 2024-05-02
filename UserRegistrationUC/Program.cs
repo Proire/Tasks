@@ -68,7 +68,7 @@ namespace UserRegistrationUC
             String password = UserInput();
             if (Regex.IsMatch(password, @"^(?=.*[A-Z])(?=.*\d)(?=.*[^\w\s]).{8,}$"))
             {
-                user.Phonenumber = phonenumber;
+                user.Password = password;
             }
             else
             {
