@@ -85,9 +85,6 @@ namespace UserRegistrationUC
             // Output the text without email samples
             Console.WriteLine("Text without email samples:");
             Console.WriteLine(textWithoutEmails);
-
-            // Lambda functions 
-
         }
 
         static String UserInput()
