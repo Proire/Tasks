@@ -28,6 +28,9 @@ namespace RegExp
             // 4. Name of the User
             string pattern3 = @"^[A-Z]\w{2,}";
             Console.WriteLine("Firstname is Correct : "+Regex.IsMatch("Prasad", pattern3));
+
+            // 5. Password (minimum 8 char, one capital, one special symbol , one digit)
+            Console.WriteLine("Firstname is Correct : " + Regex.IsMatch("Prasadahire*123", "^(?=.*[A-Z])(?=.*\\d)(?=.*[^\\w\\s]).{8,}$"));
         }
     }
 }
