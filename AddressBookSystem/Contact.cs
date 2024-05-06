@@ -1,4 +1,7 @@
-﻿using System;
+﻿using CsvHelper;
+using CsvHelper.Configuration;
+using CsvHelper.TypeConversion;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -24,6 +27,7 @@ namespace AddressBookSystem
 
         public string Email { get; set; } = email;
 
+        public Contact() : this("", "", "", "", 0, "", 0, "") { }
         public override bool Equals(Object? obj)
         {
             if(obj is Contact && obj != null)
@@ -50,6 +54,22 @@ namespace AddressBookSystem
         public override string ToString()
         {
             return $"{Id}. {FirstName} {LastName} {Address} {City} {Zip} {State} {PhoneNumber} {Email}";
+        }
+    }
+
+    internal class ContactMap : ClassMap<Contact>
+    {
+        public ContactMap()
+        {
+            Map(m => m.Id).Name("Id");
+            Map(m => m.FirstName).Name("FirstName");
+            Map(m => m.LastName).Name("LastName");
+            Map(m => m.Address).Name("Address");
+            Map(m => m.City).Name("City");
+            Map(m => m.Zip).Name("Zip");
+            Map(m => m.State).Name("State");
+            Map(m => m.PhoneNumber).Name("PhoneNumber");
+            Map(m => m.Email).Name("Email");
         }
     }
 }
