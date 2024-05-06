@@ -9,6 +9,7 @@ namespace AddressBookSystem
 {
     internal class AddressBook
     {
+        public AddressBook() { }
         public AddressBook(string addressbookname)
         {
             this.Name = addressbookname;
@@ -33,7 +34,7 @@ namespace AddressBookSystem
                     id = 0;
                 contact.Id = id + 1;
                 Contacts.Add(contact);
-                return Repository.SerializeContact(Contacts);
+                return Repository.SerializeContacts(Contacts);
             }
             return "Failed to Add Contact, Please Try Again";
         }
