@@ -222,7 +222,7 @@ internal class Program
             if (action.Equals("new"))
                 Console.Write("Enter the Last Name : ");
             else
-                Console.Write("\nEnter the Last Name of contact to be updated : ");
+                Console.Write("Enter the Last Name of contact to be updated : ");
             String lastname = UserInput();
 
             Console.Write("Enter the Address : ");
