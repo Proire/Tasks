@@ -14,9 +14,12 @@ namespace AddressBookSystem
             this.Name = addressbookname;
             Console.WriteLine($"\n---------------------- Created {addressbookname} Address Book ----------------------");
         }
-        private List<Contact> Contacts { get; set; } = [];
 
+        private List<Contact> Contacts { get; set; } = [];
         public string Name { get; set; } 
+
+        public AddressBookRepository Repository { get; set; } = new AddressBookRepository();
+
         public String AddContact(Contact contact)
         {
             Contact? ContactPresent = Contacts.FirstOrDefault(cont => cont.Equals(contact));
@@ -30,17 +33,26 @@ namespace AddressBookSystem
                     id = 0;
                 contact.Id = id + 1;
                 Contacts.Add(contact);
-                return "Contact Added Successfully";
+                return Repository.SerializeContact(Contacts);
             }
             return "Failed to Add Contact, Please Try Again";
         }
 
-        public List<Contact> GetContacts() {  return Contacts; }
+        public List<Contact> GetContacts() 
+        {  
+            Contacts = Repository.DeserializeContacts();
+            return Contacts; 
+        }
 
-        public Contact GetContact(int id) {  return Contacts[id]; } 
+        public Contact GetContact(int id) 
+        {
+            Contacts = Repository.DeserializeContacts();
+            return Contacts[id]; 
+        } 
 
         public Contact UpdateContactByName(Contact newContact)
         {
+            Contacts = Repository.DeserializeContacts();
             Contact? oldContact = Contacts.FirstOrDefault(contact => contact.FirstName == newContact.FirstName && contact.LastName == newContact.LastName);    
             if(oldContact != null)
             {
@@ -52,21 +64,25 @@ namespace AddressBookSystem
                 oldContact.Address = newContact.Address;    
                 oldContact.State = newContact.State;    
             }
+            Repository.SerializeContacts(Contacts);
             return oldContact;
         }
 
         public Contact DeleteContactByName(string firstName)
         {
+            Contacts = Repository.DeserializeContacts();
             Contact? contact = Contacts.FirstOrDefault(contact => contact.FirstName == firstName);
             if(contact != null) 
             { 
                 Contacts.Remove(contact);
             }
+            Repository.SerializeContacts(Contacts);
             return contact;
         }
 
         public List<Contact> GetContactsByCityOrState(string cityOrState)
         {
+            Contacts = Repository.DeserializeContacts();
             List<Contact> contacts = [];
             if(cityOrState != null)
             {
@@ -81,6 +97,7 @@ namespace AddressBookSystem
 
         public Dictionary<string,List<Contact>> GetContactsByCity()
         {
+            Contacts = Repository.DeserializeContacts();
             Dictionary<string, List<Contact>> cityPersons = [];
             IEnumerable<Contact> contactCity = Contacts.DistinctBy(contact => contact.City);
             if (contactCity != null)
@@ -97,6 +114,7 @@ namespace AddressBookSystem
 
         public Dictionary<string,List<Contact>> GetContactsByState()
         {
+            Contacts = Repository.DeserializeContacts();
             Dictionary<string, List<Contact>> statePersons = [];
             IEnumerable<Contact> contactState = Contacts.DistinctBy(contact => contact.State);
             if (contactState != null)
@@ -112,6 +130,7 @@ namespace AddressBookSystem
 
         public int GetCountByCityOrState(string cityOrState)
         {
+            Contacts = Repository.DeserializeContacts();
             List<Contact> contacts = [];
             if (cityOrState != null)
             {
@@ -122,11 +141,13 @@ namespace AddressBookSystem
 
         public IEnumerable<Contact> GetSortedContactsByName()
         {
+            Contacts = Repository.DeserializeContacts();
             return Contacts.OrderBy(contact => contact.FirstName).ThenBy(contact=>contact.LastName);
         }
 
         public IEnumerable<Contact> GetSortedContactsByCityAndState()
         {
+            Contacts = Repository.DeserializeContacts();
             return Contacts.OrderBy(contact => contact.City).ThenBy(contact => contact.State);
         }
     }
