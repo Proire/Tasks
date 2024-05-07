@@ -1,0 +1,13 @@
+[
+  {
+    "Id": 1,
+    "FirstName": "Mayur",
+    "LastName": "Patil",
+    "Address": "Mumbai",
+    "City": "Govandi",
+    "Zip": 400049,
+    "State": "Maharshtra",
+    "PhoneNumber": 77538235239,
+    "Email": "mayurpatil@gmail.com"
+  }
+]
