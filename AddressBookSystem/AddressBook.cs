@@ -9,18 +9,26 @@ namespace AddressBookSystem
 {
     internal class AddressBook
     {
+        // Default constructor used for Deserialization
         public AddressBook() { }
+        
+        // Paramaterized constructor for Regular AddressBook Creation
         public AddressBook(string addressbookname)
         {
             this.Name = addressbookname;
             Console.WriteLine($"\n---------------------- Created {addressbookname} Address Book ----------------------");
         }
 
+        // Collection to represent list of contacts
         private List<Contact> Contacts { get; set; } = [];
+
+        // Name of AddressBook 
         public string Name { get; set; } 
 
+        // Persistance layer object to store in file
         public AddressBookRepository Repository { get; set; } = new AddressBookRepository();
 
+        // Adding single contact to collection and file
         public String AddContact(Contact contact)
         {
             Contact? ContactPresent = Contacts.FirstOrDefault(cont => cont.Equals(contact));
@@ -39,20 +47,24 @@ namespace AddressBookSystem
             return "Failed to Add Contact, Please Try Again";
         }
 
+        // Fetching all Contacts from file
         public List<Contact> GetContacts() 
         {  
             Contacts = Repository.DeserializeContacts();
             return Contacts; 
         }
 
+        // fetching particular contact using id
         public Contact GetContact(int id) 
         {
             Contacts = Repository.DeserializeContacts();
             return Contacts[id]; 
         } 
 
+        // updating particular contact using its name
         public Contact UpdateContactByName(Contact newContact)
         {
+            // fetching all contacts from file
             Contacts = Repository.DeserializeContacts();
             Contact? oldContact = Contacts.FirstOrDefault(contact => contact.FirstName == newContact.FirstName && contact.LastName == newContact.LastName);    
             if(oldContact != null)
