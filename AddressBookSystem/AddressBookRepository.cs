@@ -15,27 +15,20 @@ namespace AddressBookSystem
 {
     internal class AddressBookRepository
     {
-        public string Path { get; set; } = @"C:\Users\proir\Desktop\Training\Tasks\AddressBookSystem\address_book.csv";
+        public string Path { get; set; } = @"C:\Users\proir\Desktop\Training\Tasks\AddressBookSystem\address_book.json";
 
         public string SerializeContacts(List<Contact> contacts)
-        {
-
-            using (var writer = new StreamWriter(Path))
-            using (var csv = new CsvWriter(writer, CultureInfo.InvariantCulture))
-            {
-                csv.WriteRecords(contacts);
-            }
+        { 
+            string jsonData = JsonConvert.SerializeObject(contacts, Formatting.Indented);
+            File.WriteAllText(Path, jsonData);
             return "Contact Saved to File Successfully";
         }
 
         public List<Contact> DeserializeContacts()
         {
-            using (var reader = new StreamReader(Path))
-            using (var csv = new CsvReader(reader, CultureInfo.InvariantCulture))
-            {
-                csv.Context.RegisterClassMap<ContactMap>();
-                return csv.GetRecords<Contact>().ToList();
-            }
+            string jsonData = File.ReadAllText(Path);
+            List<Contact> contacts = JsonConvert.DeserializeObject<List<Contact>>(jsonData);
+            return contacts;
         }
     }
 }
