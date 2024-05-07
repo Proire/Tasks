@@ -9,7 +9,7 @@ internal class Program
     {
         Console.WriteLine("Welcome to Address Book Application\n");
 
-        // Dictinary to maintain mulitple Address books
+        // Dictinary to maintain multiple Address books
         Dictionary<string, AddressBook> addressBooks = [];
 
         // Adding First Address Book

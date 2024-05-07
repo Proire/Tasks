@@ -57,7 +57,7 @@ namespace AddressBookSystem
         }
     }
 
-    internal class ContactMap : ClassMap<Contact>
+     class ContactMap : ClassMap<Contact>
     {
         public ContactMap()
         {
