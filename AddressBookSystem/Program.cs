@@ -17,7 +17,7 @@ internal class Program
         do
         {
             Console.WriteLine("\n\nEnter the Choice");
-            Console.WriteLine("\n1.Add Address Book\n2.Enter Address Book\n3.Search Person by City or State\n4.Search Person for each City\n5.Search Person for each State\n6.Get count by City or State\n7. Get Sorted Contacts by Name\n8. Get Sorted Contacts by city and state\n0.Exit Application\n");
+            Console.WriteLine("\n1.Add Address Book\n2.Enter Address Book\n3.Search Person by City or State\n4.Search Person for each City\n5.Search Person for each State\n6.Get count by City or State\n7.Get Sorted Contacts by Name\n8.Get Sorted Contacts by city and state\n0.Exit Application\n");
             _ = int.TryParse(Console.ReadLine(), out userChoice);
 
             // Choice for Creating Address Book or Entering particular Address Book

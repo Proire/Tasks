@@ -17,6 +17,10 @@ namespace AddressBookSystem
     {
         public string Path { get; set; } = @"C:\Users\proir\Desktop\Training\Tasks\AddressBookSystem\address_book.json";
 
+        public AddressBookRepository() 
+        {
+            File.WriteAllText(Path, string.Empty);
+        }
         public string SerializeContacts(List<Contact> contacts)
         { 
             string jsonData = JsonConvert.SerializeObject(contacts, Formatting.Indented);
@@ -27,7 +31,7 @@ namespace AddressBookSystem
         public List<Contact> DeserializeContacts()
         {
             string jsonData = File.ReadAllText(Path);
-            List<Contact> contacts = JsonConvert.DeserializeObject<List<Contact>>(jsonData);
+            List<Contact> contacts = JsonConvert.DeserializeObject<List<Contact>>(jsonData) ?? throw new NullInputException("Null Value not allowed");
             return contacts;
         }
     }

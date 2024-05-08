@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Serialization;
 
 namespace AddressBookSystem
 {
@@ -19,6 +20,29 @@ namespace AddressBookSystem
         // Maintaining Dictionaries for city and states
         public Dictionary<string, List<Contact>> cityPersons = [];
         public Dictionary<string, List<Contact>> statePersons = [];
+
+        // List to Hold all Contacts from all Address Books
+        public List<Contact> PersonContacts = [];
+
+        // Persistance layer object to store in file
+        public AddressBookRepository Repository { get; set; } = new AddressBookRepository();
+
+        // Method to Serialize AddressBooks
+        private void SerializeAddressBooks()
+        {
+            // This is because everytime file should be overrite with current changes not append
+            PersonContacts.Clear();
+            foreach (var addressBook in addressBooks)
+                PersonContacts.AddRange(addressBook.Value.GetContacts());
+            Repository.SerializeContacts(PersonContacts);
+        }
+
+        private void DeserializeAddressBooks()
+        {
+            List<Contact> DeserializedContacts = Repository.DeserializeContacts();
+            foreach (Contact contact in DeserializedContacts)
+                Console.WriteLine(contact);
+        }
 
         public void AddAddressBook()
         {
@@ -69,19 +93,28 @@ namespace AddressBookSystem
                         // Adding new Contact
                         Contact newContact = CreateContact("new");
                         String Addresponse = addressBook.AddContact(newContact);
+
+                        // contact added to Dictonary then storing to file
+                        SerializeAddressBooks();
                         Console.WriteLine(Addresponse);
                         break;
                     case 2:
                         // Update a Contact
                         Contact updatedContact = CreateContact("Updated");
                         Contact updatedresponse = addressBook.UpdateContactByName(updatedContact);
+
+                        // contact updated and then added to Dictonary then storing to file
+                        SerializeAddressBooks();
                         Console.WriteLine("Updated Contact : " + updatedresponse);
                         break;
                     case 3:
                         // Delete Contact by Name 
                         Console.Write("Enter the Name of Contact to be deleted : ");
-                        string deletename = Console.ReadLine();
+                        string? deletename = Console.ReadLine() ?? throw new NullInputException("Null Value not allowed");
                         Contact deleteresponse = addressBook.DeleteContactByName(deletename);
+
+                        // contact deleted and then added to Dictonary then storing to file
+                        SerializeAddressBooks();
                         Console.WriteLine("Deleted Contact details : " + deleteresponse);
                         break;
                     case 4:
@@ -93,7 +126,8 @@ namespace AddressBookSystem
                     case 5:
                         // Add Multiple Contacts
                         Console.Write("Number of Contacts you want to add: ");
-                        int contacts = int.Parse(Console.ReadLine());
+                        int contacts;
+                        int.TryParse(Console.ReadLine(), out contacts);
                         do
                         {
                             Contact contact = CreateContact("new");
@@ -101,6 +135,8 @@ namespace AddressBookSystem
                             Console.WriteLine(response);
                             contacts--;
                         } while (contacts > 0);
+                        // contacts added to Dictonary then storing to file
+                        SerializeAddressBooks();
                         break;
                     case 0:
                         Console.WriteLine($"Exiting Address Book {addressBook}, Thank you for Visiting");
@@ -117,7 +153,7 @@ namespace AddressBookSystem
         public void SearchAddressBooksByCityOrState()
         {
             Console.Write("Enter the City or State for which Contacts to be Searched : ");
-            String? cityOrState = Console.ReadLine();
+            String? cityOrState = Console.ReadLine() ?? throw new NullInputException("Null Value not allowed"); ;
             List<Contact> ResultContacts = [];
             foreach (var addressbook in addressBooks)
             {
@@ -135,11 +171,16 @@ namespace AddressBookSystem
             {
                 Dictionary<string, List<Contact>> contacts = addressbook.Value.GetContactsByCity();
                 foreach (var contact in contacts)
-                    cityPersons.TryAdd(contact.Key, contact.Value);
+                {
+                    if (cityPersons.ContainsKey(contact.Key))
+                        cityPersons[contact.Key].AddRange(contact.Value);
+                    else
+                        cityPersons.TryAdd(contact.Key, contact.Value);
+                }
             }
             foreach (var contact in cityPersons)
             {
-                Console.WriteLine("--------------" + contact.Key + "--------------");
+                Console.WriteLine("\n--------------" + contact.Key + "--------------");
                 foreach (var Contact in contact.Value)
                 {
                     Console.WriteLine(Contact + " ");
@@ -154,7 +195,12 @@ namespace AddressBookSystem
             {
                 Dictionary<string, List<Contact>> contacts = addressbook.Value.GetContactsByState();
                 foreach (var contact in contacts)
-                    statePersons.TryAdd(contact.Key, contact.Value);
+                {
+                    if (statePersons.ContainsKey(contact.Key))
+                        statePersons[contact.Key].AddRange(contact.Value);
+                    else
+                        statePersons.TryAdd(contact.Key, contact.Value);
+                }
             }
             foreach (var contact in statePersons)
             {
@@ -168,8 +214,8 @@ namespace AddressBookSystem
 
         public void CountOfContactsByCityOrState()
         {
-            Console.Write("Enter the City or State for which Count of Contacts to be given");
-            String? cityOrstate = Console.ReadLine();
+            Console.Write("Enter the City or State for which Count of Contacts to be Calculate : ");
+            String? cityOrstate = Console.ReadLine() ?? throw new NullInputException("Null Value not allowed");
             int count = 0;
             foreach (var addressbook in addressBooks)
             {
@@ -180,7 +226,7 @@ namespace AddressBookSystem
 
         public void SortedContactsByName()
         {
-            Console.Write("Sorted Contacts By Name : ");
+            Console.WriteLine("Sorted Contacts By Name : \n");
             foreach (var addressbook in addressBooks)
             {
                 IEnumerable<Contact> Contacts = addressbook.Value.GetSortedContactsByName();
@@ -193,7 +239,7 @@ namespace AddressBookSystem
 
         public void SortedContactsByCityAndState()
         {
-            Console.Write("Sorted Contacts By city and state : ");
+            Console.WriteLine("Sorted Contacts By city and state : \n");
             foreach (var addressbook in addressBooks)
             {
                 IEnumerable<Contact> Contacts = addressbook.Value.GetSortedContactsByCityAndState();
