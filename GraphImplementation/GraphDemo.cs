@@ -14,10 +14,10 @@ namespace GraphImplementation
         private int v;
 
         // Marked Visited
-        private int[]? visited;
+        private int[] visited;
 
         // adjancey matrix
-        private int[,]? graph;
+        private int[,] graph;
 
         // Intialization graph using number of nodes 
         public void CreateGraph(int nodes)
@@ -43,20 +43,20 @@ namespace GraphImplementation
 
         public void BFS(int source)
         {
-            int[] arr = new int[v];   
+            int[] arr = new int[v];    // queue for storing current vertice
             int front = 0, rear = -1;
-            visited[source] = 1;
-            arr[++rear] = source; 
+            visited[source] = 1;         // marked as visited
+            arr[++rear] = source;       // added to queue for neighbour exploration
             while (front <= rear)
             {
-                int element = arr[front++];
+                int element = arr[front++];   // removed from queue
                 Console.Write($"v{element} ");
-                for (int i=0; i < v; i++)
+                for (int i=0; i < v; i++)       // traverse to check for neighbours
                 {
-                    if (graph[element,i] == 1 && visited[i] != 1)
+                    if (graph[element,i] == 1 && visited[i] != 1)  // if it is neighbour and not visited
                     {
-                        visited[i] = 1;
-                        arr[++rear] = i;
+                        visited[i] = 1;    // marked as visited
+                        arr[++rear] = i;    // add to queue for neigbour exploration
                     }
                 }
 
