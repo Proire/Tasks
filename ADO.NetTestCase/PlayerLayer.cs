@@ -214,7 +214,7 @@ namespace ADO.NetTestCase
                 // Open the connection.           
                 con.Open();
                 
-                SqlDataReader rdr = cmd.ExecuteReader(); // returns object of sqldatareader
+                SqlDataReader rdr = cmd.ExecuteReader(); //returns object of sqldatareader
                 if (rdr.HasRows)
                 {
                     while (rdr.Read())
