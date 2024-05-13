@@ -10,11 +10,19 @@ namespace ADO.NetTestCase
 {
     internal class PlayerLayer
     {
-        private string connectionString;
+        private string connectionString = string.Empty;
 
         public PlayerLayer(IConfiguration configuration)
         {
-            connectionString = configuration.GetConnectionString("Default");
+            connectionString = configuration.GetConnectionString("Default") ?? throw new Exception("No Connection string found");
+            CreatePlayersTable();
+        }
+
+        public SqlConnection GetConnection()
+        {
+            SqlConnection con = new SqlConnection();
+            con.ConnectionString = connectionString;
+            return con;
         }
 
 
@@ -23,10 +31,8 @@ namespace ADO.NetTestCase
             SqlConnection con = null;
             try
             {
-                // Creating Connection  
-                con = new SqlConnection(connectionString);
-                // writing sql query  
-                SqlCommand cm = new SqlCommand("create table Player(id int not null, name varchar(100), petname varchar(50), DOB date)", con);
+                con = GetConnection();
+                SqlCommand cm = new SqlCommand("create table Player(id int not null, name varchar(100), petname varchar(100), DOB varchar(100))", con);
                 // Opening Connection  
                 con.Open();
                 // Executing the SQL query  
@@ -34,128 +40,189 @@ namespace ADO.NetTestCase
                 // Displaying a message  
                 Console.WriteLine("Table created Successfully");
             }
-            catch (Exception e)
+            catch (Exception)
             {
-                Console.WriteLine("OOPs, something went wrong." + e);
+                Console.WriteLine("Table already Exits");
             }
             // Closing the connection  
             finally
             {
-                con.Close();
+                con?.Close();
             }
         }
 
         public void AddPlayer()
         {
-            SqlConnection con = null;
-            
-                // Creating Connection  
-            using (con = new SqlConnection(connectionString))
-            {
-                try { 
-                    // writing sql query  
-                    SqlCommand cm = new SqlCommand("INSERT INTO Player (id, name, petname, DOB) VALUES (1, 'Abraham Benjamin de Villiers', 'MR360', '1994-02-17');", con);
-                    // Opening Connection  
-                    con.Open();
-                    // Executing the SQL query  
-                    cm.ExecuteNonQuery();
-                    // Displaying a message  
-                    Console.WriteLine("Player Added Successfully");
-                }
-                catch (Exception e)
-                {
-                    Console.WriteLine("OOPs, something went wrong." + e);
-                }
-            }
-            
-        }
+            // Prompt the user to enter values for each field
+            Console.WriteLine("Enter Player details:");
 
-        public void RemovePlayer()
-        {
-            SqlConnection con = null;
+            Console.Write("Id: ");
+            int id = int.Parse(Console.ReadLine());
 
-            // Creating Connection  
-            using (con = new SqlConnection(connectionString))
+            Console.Write("Name: ");
+            string name = Console.ReadLine();
+
+            Console.Write("Pet Name: ");
+            string petName = Console.ReadLine();
+
+            Console.Write("Date of Birth (YYYY-MM-DD): ");
+            string dob = Console.ReadLine();
+
+
+            SqlConnection con;
+
+            // Create a SqlConnection
+            using (con = GetConnection())
             {
                 try
                 {
-                    // writing SQL query to delete a player
-                    SqlCommand cmd = new SqlCommand("DELETE FROM Player WHERE name = 'Abraham Benjamin de Villiers';", con);
+                    // Prepare the SQL query with parameters
+                    string sqlQuery = "INSERT INTO Player (id, name, petname, DOB) VALUES (@Id, @Name, @PetName, @DOB)";
 
-                    // Opening Connection  
+                    // Create a SqlCommand with parameters
+                    SqlCommand cmd = new SqlCommand(sqlQuery, con);
+                    cmd.Parameters.AddWithValue("@Id", id);
+                    cmd.Parameters.AddWithValue("@Name", name);
+                    cmd.Parameters.AddWithValue("@PetName", petName);
+                    cmd.Parameters.AddWithValue("@DOB", dob);
+
+                    // Open the connection
                     con.Open();
 
-                    // Executing the SQL query  
-                    cmd.ExecuteNonQuery();
+                    // Execute the SQL query
+                    int rowsAffected = cmd.ExecuteNonQuery();
 
-                    // Displaying a message  
-                    Console.WriteLine("Player removed Successfully");
+                    // Display success message
+                    if (rowsAffected > 0)
+                    {
+                        Console.WriteLine("\nPlayer Added Successfully");
+                    }
+                    else
+                    {
+                        Console.WriteLine("\nPlayer could not be added.");
+                    }
                 }
-                catch (Exception e)
+                catch (Exception)
                 {
-                    Console.WriteLine("OOPs, something went wrong." + e);
+                    Console.WriteLine("\nProblem occured while adding ");
+                }
+            }
+        }
+
+        public void DeletePlayer()
+        {
+            Console.Write("\nEnter the ID of the player you want to delete: ");
+            int playerId = int.Parse(Console.ReadLine());
+
+            // Create a SqlConnection
+            using (SqlConnection con = GetConnection())
+            {
+                try
+                {
+                    // Prepare the SQL DELETE query with parameter
+                    string sqlQuery = "DELETE FROM Player WHERE id = @Id";
+
+                    // Create a SqlCommand with parameter
+                    SqlCommand cmd = new SqlCommand(sqlQuery, con);
+                    cmd.Parameters.AddWithValue("@Id", playerId);
+
+                    // Open the connection
+                    con.Open();
+
+                    // Execute the SQL query
+                    int rowsAffected = cmd.ExecuteNonQuery();
+
+                    // Display success message
+                    if (rowsAffected > 0)
+                    {
+                        Console.WriteLine("\nPlayer with ID " + playerId + " deleted successfully");
+                    }
+                    else
+                    {
+                        Console.WriteLine("\nNo player found with ID " + playerId);
+                    }
+                }
+                catch (Exception)
+                {
+                    Console.WriteLine("\nError Occured while deleting");
                 }
             }
         }
 
         public void UpdatePlayer()
         {
-            SqlConnection con = null;
+            // Prompt the user for the ID of the player they want to update
+            Console.Write("\nEnter the ID of the player you want to update: ");
+            int playerId = int.Parse(Console.ReadLine());
 
-            // Creating Connection  
-            using (con = new SqlConnection(connectionString))
+            // Prompt the user for updated values
+            Console.Write("Enter new name: ");
+            string newName = Console.ReadLine();
+
+            // Prompt the user for updated values
+            Console.Write("Enter new pet name: ");
+            string newPetName = Console.ReadLine();
+
+            Console.Write("Enter new date of birth (YYYY-MM-DD): ");
+            string newDOB = Console.ReadLine();
+
+            // Create a SqlConnection
+            using (SqlConnection con = GetConnection())
             {
                 try
                 {
-                    // writing SQL query to update a player
-                    SqlCommand cmd = new SqlCommand("UPDATE Player SET petname = 'Genius', DOB ='1984-02-17'  WHERE name = 'Abraham Benjamin de Villiers';", con);
+                    // Prepare the SQL UPDATE query with parameters
+                    string sqlQuery = "UPDATE Player SET petname = @PetName, DOB = @DOB, name=@Name WHERE id = @Id";
 
-                    // Opening Connection  
+                    // Create a SqlCommand with parameters
+                    SqlCommand cmd = new SqlCommand(sqlQuery, con);
+                    cmd.Parameters.AddWithValue("@PetName", newPetName);
+                    cmd.Parameters.AddWithValue("@Name", newName);
+                    cmd.Parameters.AddWithValue("@DOB", newDOB);
+                    cmd.Parameters.AddWithValue("@Id", playerId);
+
+                    // Open the connection
                     con.Open();
 
-                    // Executing the SQL query  
+                    // Execute the SQL query
                     int rowsAffected = cmd.ExecuteNonQuery();
 
-                    // Displaying a message  
+                    // Display success or failure message
                     if (rowsAffected > 0)
                     {
-                        Console.WriteLine("Player updated Successfully");
+                        Console.WriteLine("\nPlayer with ID " + playerId + " updated successfully");
                     }
                     else
                     {
-                        Console.WriteLine("Player not found");
+                        Console.WriteLine("\nNo player found with ID " + playerId);
                     }
                 }
-                catch (Exception e)
+                catch (Exception)
                 {
-                    Console.WriteLine("OOPs, something went wrong." + e);
+                    Console.WriteLine("\nError occured while Updating the player");
                 }
             }
         }
 
         public void GetPlayers()
         {
-            using (SqlConnection con = new SqlConnection(connectionString))
+            using (SqlConnection con = GetConnection())
             {
-                // Pass the connection to the command object, so the command object knows on which
-                // connection to execute the command
-                SqlCommand cmd = new SqlCommand("Select * from Player", con);
-                // Open the connection. Otherwise you get a runtime error. An open connection is
-                // required to execute the command            
+                
+                SqlCommand cmd = new("Select * from Player", con);
+
+                // Open the connection.           
                 con.Open();
-                Console.WriteLine("connected");
-                SqlDataReader rdr = cmd.ExecuteReader(); //returns object of sqldatareder
+                
+                SqlDataReader rdr = cmd.ExecuteReader(); // returns object of sqldatareader
                 if (rdr.HasRows)
                 {
                     while (rdr.Read())
                     {
-                        Console.WriteLine("{0} {1} {2} {3}", rdr["id"],rdr["name"], rdr["petname"], rdr["DOB"]);
+                        Console.WriteLine("{0} {1} {2} {3}", rdr["id"], rdr["name"], rdr["petname"], rdr["DOB"]);
                     }
                 }
             }
-
         }
-
-
     }
 }
