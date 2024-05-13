@@ -21,7 +21,7 @@ namespace ADO.NetTestCase
             Console.ReadKey();
             player.GetPlayers();
             Console.ReadKey();
-            player.RemovePlayer();
+            player.DeletePlayer();
 
         }
         
