@@ -23,7 +23,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Generics", "Generics\Generi
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AtmMachine", "AtmMachine\AtmMachine.csproj", "{3A084DEE-1ABE-4418-97EE-E746E07EF68E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FileIOReadCount", "FileIOReadCount\FileIOReadCount.csproj", "{FBC8FA25-EB26-4F6D-ACBD-A3CA5E7D56E8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FileIOReadCount", "FileIOReadCount\FileIOReadCount.csproj", "{FBC8FA25-EB26-4F6D-ACBD-A3CA5E7D56E8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ADO.NetTestCase", "ADO.NetTestCase\ADO.NetTestCase.csproj", "{21ABB65E-9638-491C-8B75-38E5C302BA55}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -71,6 +73,10 @@ Global
 		{FBC8FA25-EB26-4F6D-ACBD-A3CA5E7D56E8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FBC8FA25-EB26-4F6D-ACBD-A3CA5E7D56E8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FBC8FA25-EB26-4F6D-ACBD-A3CA5E7D56E8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{21ABB65E-9638-491C-8B75-38E5C302BA55}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{21ABB65E-9638-491C-8B75-38E5C302BA55}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{21ABB65E-9638-491C-8B75-38E5C302BA55}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{21ABB65E-9638-491C-8B75-38E5C302BA55}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

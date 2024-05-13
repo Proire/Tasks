@@ -85,13 +85,13 @@ namespace GraphImplementation
 
         public void DFS(int source)
         {
-            visited[source] = 1;
+            visited[source] = 1;     // visited on which dfs is called
             Console.Write("v" + source+" ");
-            for (int i = 0; i < v; i++)
+            for (int i = 0; i < v; i++)    // traverse to check for neigbours
             {
-                if (graph[source,i]==1 && visited[i]!=1)
+                if (graph[source,i]==1 && visited[i]!=1)  // if neigbour and not visited
                 {
-                    DFS(i);
+                    DFS(i);      // called dfs on that make his visited
                 }
             }
         }
